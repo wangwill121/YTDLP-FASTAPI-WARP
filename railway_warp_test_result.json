@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-07-27T18:04:56.802459",
+  "railway_url": "https://web-production-90e87.up.railway.app",
+  "tests": {
+    "health": true,
+    "ip_check": null,
+    "warp_test": null,
+    "warp_status": null,
+    "video_api": null
+  }
+}
