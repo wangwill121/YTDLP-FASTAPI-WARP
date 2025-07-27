@@ -164,6 +164,14 @@ async def lifespan(app: FastAPI):
 # 解析允许的主机
 try:
     allowed_hosts = settings.ALLOWED_HOSTS.split(",")
+    
+    # 如果禁用主机验证或者是直链模式，则允许所有主机
+    if settings.DISABLE_HOST_VALIDATION or settings.DIRECT_LINK_MODE:
+        allowed_hosts = ["*"]
+        logger.info("⚠️ 主机验证已禁用（直链模式或配置禁用），允许所有主机访问")
+    else:
+        logger.info(f"✅ 启用主机验证，允许的主机: {allowed_hosts}")
+        
 except Exception as e:
     logger.error(f"❌ 解析 ALLOWED_HOSTS 失败: {e}")
     allowed_hosts = ["*"]  # 失败时的默认值
