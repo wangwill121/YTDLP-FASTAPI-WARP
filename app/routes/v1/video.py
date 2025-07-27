@@ -57,9 +57,9 @@ async def fetch_simple(request: Request, video_id: str, x_secret: Annotated[Opti
         # 🔐 API 鉴权检查
         if not settings.validate_secret_for_domain(x_secret, str(request.url.hostname)):
             raise HTTPException(status_code=401, detail="Invalid API key")
-        
+
         # 🎬 基础验证
-        if not DLPUtils.validate_youtube_video_id(video_id):
+    if not DLPUtils.validate_youtube_video_id(video_id):
             raise HTTPException(status_code=400, detail="无效的 YouTube 视频 ID")
         
         logger.info(f"开始解析视频: {video_id}")
@@ -178,7 +178,7 @@ async def fetch_simple(request: Request, video_id: str, x_secret: Annotated[Opti
                 "video_url": video_format.get('url') if video_format else None,
                 "audio_url": audio_format.get('url') if audio_format else None,
             })
-        else:
+    else:
             # 代理模式：返回加密的本地代理链接
             host = str(request.url.hostname)
             port = request.url.port
@@ -223,7 +223,7 @@ async def fetch_simple(request: Request, video_id: str, x_secret: Annotated[Opti
         
         logger.info(f"视频解析完成: {video_id}, 耗时: {processing_time:.2f}秒")
         
-        return JSONResponse(
+            return JSONResponse(
             content=response_data,
             headers={"X-Processing-Time": f"{processing_time:.3f}"}
         )
@@ -243,7 +243,7 @@ async def fetch_simple(request: Request, video_id: str, x_secret: Annotated[Opti
             proxy_used=proxy_used
         )
         raise
-    except Exception as e:
+        except Exception as e:
         processing_time = time.time() - start_time
         
         # 释放代理（异常情况）

@@ -48,9 +48,9 @@ class Settings(BaseSettings):
     @field_validator('COOKIES')
     def load_cookies(cls, v, values):
         if not v and values.data.get("COOKIES_URL"):
-            url = values.data["COOKIES_URL"]
+        url = values.data["COOKIES_URL"]
             try:
-                return fetch_cookies_data(url)
+            return fetch_cookies_data(url)
             except:
                 return ''
         return v or ''
