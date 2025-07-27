@@ -15,4 +15,5 @@ COPY ./warp-configs /code/warp-configs
 # 确保start.sh有执行权限
 RUN chmod +x /code/start.sh
 
-ENTRYPOINT ["/code/start.sh"]
+# 使用 sh -c 方式执行，Railway 100% 兼容
+ENTRYPOINT ["/bin/sh", "-c", "/code/start.sh"]
