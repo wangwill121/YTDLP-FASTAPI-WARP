@@ -9,6 +9,9 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./app /code/app
 
+# 复制 WARP 配置文件目录（如果存在）
+COPY ./warp-configs /code/warp-configs
+
 # 确保start.sh有执行权限
 RUN chmod +x /code/start.sh
 
