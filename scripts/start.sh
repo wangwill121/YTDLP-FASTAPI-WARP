@@ -32,5 +32,9 @@ echo "📊 端口: $PORT"
 echo "⚡ 工作进程: $WORKERS"
 echo "🔧 模式: ${RAILWAY_ENVIRONMENT:-development}"
 
-# 使用 python（Docker 环境中的标准命令）
-exec python -m uvicorn app.main:app --workers $WORKERS --host=0.0.0.0 --port="$PORT"
+# 在Docker环境中直接使用python3，避免兼容性问题
+PYTHON_CMD="python3"
+echo "🐍 使用 Python 命令: $PYTHON_CMD"
+
+# 启动服务
+exec $PYTHON_CMD -m uvicorn app.main:app --workers $WORKERS --host=0.0.0.0 --port="$PORT"
