@@ -1,7 +1,13 @@
 #!/bin/bash
 
+# 设置错误时退出
+set -e
+
+echo "🚀 YTDLP FastAPI 服务启动中..."
+
 # Set the default port if not defined
 PORT=${PORT:-8000}
+echo "🔧 使用端口: $PORT"
 
 # 为Railway环境优化worker数量
 if [ "$RAILWAY_ENVIRONMENT" = "production" ] || [ -n "$RAILWAY_PROJECT_ID" ]; then
@@ -22,10 +28,9 @@ else
     fi
 fi
 
-echo "🚀 启动 FastAPI 服务..."
 echo "📊 端口: $PORT"
 echo "⚡ 工作进程: $WORKERS"
 echo "🔧 模式: ${RAILWAY_ENVIRONMENT:-development}"
 
-# Run the uvicorn server with the specified settings
-uvicorn app.main:app --workers $WORKERS --host=0.0.0.0 --port="$PORT" --loop uvloop --http h11
+# 使用 python（Docker 环境中的标准命令）
+exec python -m uvicorn app.main:app --workers $WORKERS --host=0.0.0.0 --port="$PORT"
