@@ -40,10 +40,10 @@ def decrypt_data(encrypted_data: str) -> Optional[Dict[str, Any]]:
     """
     解密数据
 
-    Args:
+        Args:
         encrypted_data: 加密的 base64 字符串
 
-    Returns:
+        Returns:
         解密后的数据字典，如果解密失败或过期则返回 None
     """
     try:
@@ -70,7 +70,7 @@ def generate_encryption_key() -> str:
     """
     生成新的加密密钥
 
-    Returns:
+        Returns:
         base64 编码的加密密钥
     """
     key = Fernet.generate_key()

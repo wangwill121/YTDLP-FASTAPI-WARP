@@ -15,8 +15,8 @@ class Settings(BaseSettings):
     # 核心功能配置
     DIRECT_LINK_MODE: int = 1
     
-    # 域名和访问控制
-    ALLOWED_HOSTS: str = 'localhost,127.0.0.1,*.vercel.app'
+    # 域名和访问控制 - Railway 兼容配置
+    ALLOWED_HOSTS: str = 'localhost,127.0.0.1,*.vercel.app,*.up.railway.app,*.railway.app'
     
     # API 鉴权配置
     SECRET_KEY: str = 'your-main-secret-key-2024'
@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     DISABLE_TURNSTILE: int = 1
     DISABLE_DOCS: int = 0
     DISABLE_DEMO: int = 0
-    DISABLE_HOST_VALIDATION: int = 1
+    DISABLE_HOST_VALIDATION: int = 1  # Railway 部署时推荐禁用严格主机验证
     
     # WARP 代理池配置
     WARP_CONFIG_DIR: str = 'warp-configs'
