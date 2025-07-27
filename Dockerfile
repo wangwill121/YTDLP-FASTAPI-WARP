@@ -15,4 +15,4 @@ COPY ./warp-configs /code/warp-configs
 # 确保start.sh有执行权限
 RUN chmod +x /code/start.sh
 
-CMD ["/code/start.sh"]
+ENTRYPOINT ["/code/start.sh"]
